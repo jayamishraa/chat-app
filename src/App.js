@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ChatList from "./components/ChatList";
+import Header from "./components/Header";
+import InputSend from "./components/InputSend";
+import './index.css'
 
 function App() {
+  const [messages, setMessages] = useState([
+    {
+      user: 'person1',
+      body: 'test message'
+    }
+  ])
+  const [loader, setLoader] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <ChatList 
+        messages={messages} 
+        loader={loader}
+      />
+      <InputSend 
+        messages={messages}
+        setMessages={setMessages}
+        setLoader={setLoader}
+      />
     </div>
   );
 }
